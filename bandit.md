@@ -2,15 +2,16 @@
 #### Bandit Level 16 → Level 17
 The credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First find out which of these ports have a server listening on them. Then find out which of those speak SSL/TLS and which don’t. There is only 1 server that will give the next credentials, the others will simply send back to you whatever you send to it.
 ```shell
+nmap -p 31000-32000 localhost
+openssl s_client 0.0.0.0:31518
+echo -n "kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx" | openssl -connect 0.0.0.0:31518
+
 netstat -tuln
 ss -tuln | grep 31
 # -t show TCP
 # -u show UDP
 # -l Display only listening sockets (these are omitted by default).
 # -n Do not try to resolve service names
-
-
-
 ```
 
 #### Bandit Level 15 → Level 16
