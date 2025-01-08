@@ -1,3 +1,98 @@
+#### Bandit Level 21 → Level 22
+A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+
+NOTE: Looking at shell scripts written by other people is a very useful skill. The script for this level is intentionally made easy to read. If you are having problems understanding what it does, try executing it to see the debug information it prints.
+
+Commands you may need to solve this level
+cron, crontab, crontab(5) (use “man 5 crontab” to access this)
+
+```shell
+bandit22@bandit:~$ ls  /etc/cron.d/
+bandit22@bandit:~$ cat /etc/cron.d/cronjob_bandit23
+bandit22@bandit:~$ cat /usr/bin/cronjob_bandit23.sh
+bandit22@bandit:~$ echo I am user bandit23 | md5sum | cut -d ' ' -f 1 
+# 8ca319486bfbbc3663ea0fbe81326349
+bandit22@bandit:~$ cat /tmp/8ca319486bfbbc3663ea0fbe81326349
+# 0Zf11ioIjMVN551jX3CmStKLYqjk54Ga
+```
+
+#### Bandit Level 21 → Level 22
+A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+
+Commands you may need to solve this level
+cron, crontab, crontab(5) (use “man 5 crontab” to access this)
+
+```shell
+bandit21@bandit:~$ ls  /etc/cron.d/
+bandit21@bandit:~$ cat  /etc/cron.d/cronjob_bandit22
+bandit21@bandit:~$ cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+# tRae0UfB9v0UzbCdn9cY0gQnds9GF58Q
+```
+
+#### Bandit Level 20 → Level 21
+There is a setuid binary in the homedirectory that does the following: it makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21).
+
+NOTE: Try connecting to your own network daemon to see if it works as you think
+
+Commands you may need to solve this level
+ssh, nc, cat, bash, screen, tmux, Unix ‘job control’ (bg, fg, jobs, &, CTRL-Z, …)
+
+```shell
+bandit20@bandit:~$ ls -l
+bandit20@bandit:~$ (terminal_1) nc -l -p 8080
+bandit20@bandit:~$ (terminal_2) ./suconnect 8080
+bandit20@bandit:~$ (terminal_1) 0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO
+# EeoULMCra2q0dSkYj561DX7s1CpBuOBt
+```
+
+#### Bandit Level 19 → Level 20
+
+To gain access to the next level, you should use the setuid binary in the homedirectory. Execute it without arguments to find out how to use it. The password for this level can be found in the usual place (/etc/bandit_pass), after you have used the setuid binary.
+
+**Helpful Reading Material**: 
+setuid on Wikipedia
+
+```shell
+bandit19@bandit:~$ ls
+bandit19@bandit:~$ bandit20-do
+bandit19@bandit:~$ ./bandit20-do id
+bandit19@bandit:~$ ./bandit20-do cat /etc/bandit_pass/bandit20
+# 0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO
+```
+
+
+#### Bandit Level 18 → Level 19
+The password for the next level is stored in a file readme in the homedirectory. Unfortunately, someone has modified .bashrc to log you out when you log in with SSH.
+
+**Commands you may need to solve this level:**
+ssh, ls, cat
+
+```shell
+$ echo cat readme | ssh bandit18@bandit.labs.overthewire.org -p 2220 
+# cGWpMaKXVwDUNgPAVJbWYuGHVn9zl3j8
+```
+
+
+#### Bandit Level 17 → Level 18
+There are 2 files in the homedirectory: passwords.old and passwords.new. The password for the next level is in passwords.new and is the only line that has been changed between passwords.old and passwords.new
+
+**NOTE**: if you have solved this level and see ‘Byebye!’ when trying to log into bandit18, this is related to the next level, bandit19
+
+**Commands you may need to solve this level:**
+cat, grep, ls, diff
+
+```shell
+bandit17@bandit:~$ ls
+# passwords.new  passwords.old
+
+bandit17@bandit:~$ diff passwords.old passwords.new
+42c42
+< ktfgBvpMzWKR5ENj26IbLGSblgUG9CzB
+---
+> x2gLTTjFwMOhQ8oWNbMN362QKxfRqGlO
+
+# x2gLTTjFwMOhQ8oWNbMN362QKxfRqGlO
+```
 
 #### Bandit Level 16 → Level 17
 The credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First find out which of these ports have a server listening on them. Then find out which of those speak SSL/TLS and which don’t. There is only 1 server that will give the next credentials, the others will simply send back to you whatever you send to it.

@@ -53,6 +53,12 @@ For SSL Ports:
 openssl s_client -connect localhost:<port>
 ```
 - `nc` - reading from and writing to network connections using TCP or UDP. Port Scanning, File Transfers, Creating Simple Servers
+```shell
+# Create a server
+nc -l -p 8080  
+# -l - listen TCP
+# -p - on port 8080
+```
 
 ```bash
 # Create a TCP server that echoes back received data:
@@ -99,4 +105,26 @@ openssl s_client 0.0.0.0:30000
 # Correct!
 ```
 
+#### Cron configuration
+```shell
+$ lcat /etc/cron.d/<file_name>
 
+@reboot bandit23 /usr/bin/cronjob_bandit23.sh &> /dev/null
+* * * * * bandit23 /usr/bin/cronjob_bandit23.sh  &> /dev/null
+
+## Line 1
+# @reboot: This means the job will execute once at system startup or reboot.
+# bandit23: Specifies the user bandit23 under whose context the job will run.
+# /usr/bin/cronjob_bandit23.sh: The script to be executed (cronjob_bandit23.sh) located in /usr/bin/.
+# &> /dev/null: Redirects both standard output (stdout) and standard error (stderr) to /dev/null, effectively discarding any output or error messages.
+
+
+## Line 2:
+# * * * * *: Represents the cron timing fields, meaning:
+# - Minute: * (every minute)
+# - Hour: * (every hour)
+# - Day of the month: * (every day)
+# - Month: * (every month)
+# - Day of the week: * (every day of the week)
+# - Together, this means the job will run every minute.
+```
