@@ -8,13 +8,16 @@ Find solutions at [Bandit.dm](./bandit.md)
 
 - `nmap` - Network exploration tool and security / port scanner. determine what hosts are available on the network
 ```shell
-nmap -p 31000-32000 localhost
-nmap -A -T4 scanme.nmap.org
+ifconfig                      # get current ip
+nmap -p 31000-32000 localhost # scan range
+nmap -p 31000 localhost       # scan port
 
+nmap -A -T4 188.129.132.92    # scan all ports
 Nmap scan report for scanme.nmap.org (74.207.244.221)
 Host is up (0.029s latency).
 rDNS record for 74.207.244.221: li86-221.members.linode.com
 Not shown: 995 closed ports
+
 PORT     STATE    SERVICE     VERSION
 22/tcp   open     ssh         OpenSSH 5.3p1 Debian 3ubuntu7 (protocol 2.0)
 | ssh-hostkey: 1024 8d:60:f1:7c:ca:b7:3d:0a:d6:67:54:9d:69:d9:b9:dd (DSA)
@@ -52,6 +55,7 @@ For SSL Ports:
 ```shell
 openssl s_client -connect localhost:<port>
 ```
+
 - `nc` - reading from and writing to network connections using TCP or UDP. Port Scanning, File Transfers, Creating Simple Servers
 ```shell
 # Create a server

