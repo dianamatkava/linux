@@ -1,9 +1,116 @@
+#### Bandit Level 31 → Level 32
+There is a git repository at ssh://bandit31-git@localhost/home/bandit31-git/repo via the port 2220. The password for the user bandit31-git is the same as for the user bandit31.
+
+Clone the repository and find the password for the next level.
+```shell
+bandit30@bandit:~$ cd $(mktemp -d)
+bandit30@bandit:/tmp/tmp.ClPZkvATLk$ git clone ssh://bandit31-git@localhost:2220/home/bandit31-git/repo
+bandit30@bandit:/tmp/tmp.ClPZkvATLk$ cd repo
+bandit30@bandit:/tmp/tmp.ClPZkvATLk/repo$ cat README
+bandit30@bandit:/tmp/tmp.ClPZkvATLk/repo$ echo "May I come in?" >> key.txt
+bandit30@bandit:/tmp/tmp.ClPZkvATLk/repo$ git add key.txt -f
+bandit30@bandit:/tmp/tmp.ClPZkvATLk/repo$ git commit -m "May I come in?"
+bandit30@bandit:/tmp/tmp.ClPZkvATLk/repo$ git remote add repo ssh://bandit31-git@localhost:2220/home/bandit31-git/repo
+bandit30@bandit:/tmp/tmp.ClPZkvATLk/repo$ git push repo master
+# 3O9RfhqyAlVBEZpVb6LYStshZoqoSx5K
+```
+
+#### Bandit Level 30 → Level 31
+There is a git repository at ssh://bandit30-git@localhost/home/bandit30-git/repo via the port 2220. The password for the user bandit30-git is the same as for the user bandit30.
+
+Clone the repository and find the password for the next level.
+
+```shell
+bandit30@bandit:~$ cd $(mktemp -d)
+bandit30@bandit:/tmp/tmp.ClPZkvATLk$ git clone ssh://bandit30-git@localhost:2220/home/bandit30-git/repo
+bandit30@bandit:/tmp/tmp.ClPZkvATLk$ cd repo
+bandit30@bandit:/tmp/tmp.ClPZkvATLk/repo$ cat README
+bandit30@bandit:/tmp/tmp.ClPZkvATLk/repo$ git tag
+bandit30@bandit:/tmp/tmp.ClPZkvATLk/repo$ git show secret
+# fb5S2xb7bRyFmAvQYQGEqsbhVyJqhnDy
+```
+
+#### Bandit Level 29 → Level 30
+There is a git repository at ssh://bandit29-git@localhost/home/bandit29-git/repo via the port 2220. The password for the user bandit29-git is the same as for the user bandit29.
+
+Clone the repository and find the password for the next level.
+
+```shell
+bandit29@bandit:~$ cd $(mktemp -d)
+bandit29@bandit:/tmp/tmp.ClPZkvATLk$ git clone ssh://bandit29-git@localhost:2220/home/bandit29-git/repo
+bandit29@bandit:/tmp/tmp.ClPZkvATLk$ cd repo
+bandit29@bandit:/tmp/tmp.ClPZkvATLk/repo$ cat README
+bandit29@bandit:/tmp/tmp.ClPZkvATLk/repo$ git log
+bandit29@bandit:/tmp/tmp.ClPZkvATLk/repo$ git diff e65a928 6ac7796
+#-- username: bandit29
+#+- username: bandit30
+# - password: <no passwords in production!>
+bandit29@bandit:/tmp/tmp.ClPZkvATLk/repo$ git branch -a
+#* master
+#  remotes/origin/HEAD -> origin/master
+#  remotes/origin/dev
+#  remotes/origin/master
+#  remotes/origin/sploits-dev
+bandit29@bandit:/tmp/tmp.ClPZkvATLk/repo$ git switch dev
+# qp30ex3VLz5MDG1n91YowTv4Q8l7CDZL
+```
+
+
+#### Bandit Level 28 → Level 29
+There is a git repository at ssh://bandit28-git@localhost/home/bandit28-git/repo via the port 2220. The password for the user bandit28-git is the same as for the user bandit28.
+
+Clone the repository and find the password for the next level.
+
+```shell
+bandit28@bandit:~$ mktemp -d  # >> /tmp/tmp.ClPZkvATLk
+bandit28@bandit:/tmp/tmp.ClPZkvATLk$ cd /tmp/tmp.ClPZkvATLk
+bandit28@bandit:/tmp/tmp.ClPZkvATLk$ git clone ssh://bandit28-git@localhost:2220/home/bandit28-git/repo
+bandit28@bandit:/tmp/tmp.ClPZkvATLk$ cd repo
+bandit28@bandit:/tmp/tmp.ClPZkvATLk/repo$ cat README
+bandit28@bandit:/tmp/tmp.ClPZkvATLk/repo$ git log
+bandit28@bandit:/tmp/tmp.ClPZkvATLk/repo$ git diff 3621de89d8eac9d3b64302bfb2dc67e9a566decd
+# 4pT1t5DENaYuqnqvadYs1oE4QLCdjmJ7
+```
+
+#### Bandit Level 27 → Level 28
+There is a git repository at ssh://bandit27-git@localhost/home/bandit27-git/repo via the port 2220. The password for the user bandit27-git is the same as for the user bandit27.
+
+```shell
+bandit27@bandit:~$ mktemp -d  # >> /tmp/tmp.ClPZkvATLk
+bandit27@bandit:/tmp/tmp.ClPZkvATLk$ cd /tmp/tmp.ClPZkvATLk
+bandit27@bandit:/tmp/tmp.ClPZkvATLk$ git clone ssh://bandit27-git@localhost:2220/home/bandit27-git/repo
+bandit27@bandit:/tmp/tmp.ClPZkvATLk$ cd repo
+bandit27@bandit:/tmp/tmp.ClPZkvATLk/repo$ cat README
+# Yz9IpL0sBcCeuG7m9uQFt8ZNpS4HZRcN
+```
+
+#### Bandit Level 26 → Level 27
+Good job getting a shell! Now hurry and grab the password for bandit27!
+
+```shell
+# login again to bangit26
+bandit26@bandit:~$ ./bandit27-do cat /etc/bandit\_pass/bandit27
+upsNCc7vzaRDx6oZC6GiR6ERwe1MowGB
+```
+
+#### Bandit Level 25 → Level 26
+Logging in to bandit26 from bandit25 should be fairly easy… The shell for user bandit26 is not /bin/bash, but something else. Find out what it is, how it works and how to break out of it.
+
+```shell
+bandit25@bandit:~$ ssh -i bandit26.sshkey bandit26@localhost -p 2220
+# :e /etc/bandit\_pass/bandit26
+# :set shell=/bin/bash
+# :shell
+# s0773xxkk0MXfdqOfPRVr9L3jJBUOgCZ
+```
+
 #### Bandit Level 24 → Level 25
 A daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, called brute-forcing.
 You do not need to create new connections each time
 ```shell
 bandit24@bandit:~$ python3
-
+```
+``` python
 import socket
 from time import sleep
 
@@ -52,8 +159,8 @@ chmod, cron, crontab, crontab(5) (use “man 5 crontab” to access this)
 bandit23@bandit:~$ cat /usr/bin/cronjob_bandit24.sh
 bandit23@bandit:~$ cd /var/spool/bandit24/foo
 bandit23@bandit:~$ nano crack.sh
-#!/bin/bash
 
+#!/bin/bash
 log_file="/tmp/bandit24_files.txt"
 echo "Logging started at $(date)" > "$log_file"
 for item in /var/spool/bandit24/foo/*; do
