@@ -1,3 +1,17 @@
+#### Bandit Level 32 → Level 33
+
+After all this git stuff, it’s time for another escape. Good luck! (sh, man)
+
+```shell
+>> $0
+$ ls -al
+$ whoami
+bandit33
+$ cat /etc/bandit\_pass/bandit33
+# tQdtbs5D5i2vJwkO8mEyYEyTL8izoeJ0
+```
+
+
 #### Bandit Level 31 → Level 32
 There is a git repository at ssh://bandit31-git@localhost/home/bandit31-git/repo via the port 2220. The password for the user bandit31-git is the same as for the user bandit31.
 
